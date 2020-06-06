@@ -1,0 +1,30 @@
+{
+  "name": "@prudencss/postcss",
+  "version": "0.0.1",
+  "description": "ITCSS based postcss framework",
+  "main": "src/prudencss.sss",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/prudencss/postcss.git"
+  },
+  "keywords": [
+    "itcss",
+    "postcss",
+    "css",
+    "framework",
+    "bem",
+    "oocss",
+    "flexbox",
+    "lost",
+    "grid"
+  ],
+  "author": "@joehannes",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/prudencss/postcss/issues"
+  },
+  "homepage": "https://github.com/prudencss/postcss#readme"
+}
