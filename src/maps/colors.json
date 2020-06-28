@@ -12,8 +12,8 @@
     "disabled": "gray"
   },
   "neutral": {
-    "light": "white",
-    "dark": "black"
+    "foreground": "black",
+    "background": "white"
   },
   "vendor": {
     "facebook": "#1877f2",
