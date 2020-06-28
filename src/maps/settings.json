@@ -1,0 +1,9 @@
+{
+  "env": "prod",
+  "debug": true,
+  "coreFontSize": "16px",
+  "specialChar": {
+    "breakpointSeparator": "@",
+    "ratioSeparator": ":"
+  }
+}
