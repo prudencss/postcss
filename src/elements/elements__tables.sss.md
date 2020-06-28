@@ -1,16 +1,18 @@
-/* -------------------------------------------------------------------------
- * TABLES
- *
- * 1. Ensure tables fill up as much space as possible.
-
-// Tables variables
+/*---
+title: TABLES
+section: settings
+---
+Ensure tables fill up as much space as possible.
+*/
 
 $e-tables__full-width: true !default
 
-// Tables output
+/*---
+section: general
+*/
+
 
 @if $e-tables__full-width
   table
     width: 100%
 
-    /* [1]

@@ -1,14 +1,16 @@
-/* -------------------------------------------------------------------------
- * PARAGRAPHS
- *
- * Appearance & behaviour for paragraphs
-
-// Paragraphs variables
+/*---
+title: PARAGRAPHS
+section: settings
+---
+Appearance & behaviour for paragraphs
+*/
 
 $e-paragraphs__spacing-vertical: $g-reset__spacing--vertical !default
-$e-paragraphs__space-within: $f-space--small !default
+$e-paragraphs__space-within: map(spaces, s) !default
 
-// Paragraphs output
+/*---
+section: general
+*/
 
 p + p
   margin-top: ($e-paragraphs__spacing-vertical - $e-paragraphs__space-within) * -1

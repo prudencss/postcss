@@ -1,27 +1,34 @@
-/* -------------------------------------------------------------------------
- * IMAGES
- *
- * 1. Fluid images for responsive purposes.
- * 2. Offset `alt` text from surrounding copy.
- * 3. Setting `vertical-align` removes the whitespace that appears under `img`
- *    elements when they are dropped into a page as-is. Safer alternative to
- *    using `display: block;`.
-
-// Images variables
+/*---
+title: IMAGES
+section: settings
+*/
 
 $e-images__fluid: true !default
 
-// Images output
+/*
+section: font-style
+---
+Fluid images for responsive purposes.
+*/
 
 img
   font-style: italic
 
-  /* [2]
+/*
+section: alt-text
+---
+Offset `alt` text from surrounding copy.
+*/
+
+img
   vertical-align: middle
 
-  /* [3]
+/*
+section: spacing
+---
+Setting `vertical-align` removes the whitespace that appears under `img` elements when they are dropped into a page as-is. Safer alternative to using `display: block;`.
+*/
 
+img
   @if $e-images__fluid
     width: 100%
-
-    /* [1]

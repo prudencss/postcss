@@ -1,17 +1,19 @@
-/* -------------------------------------------------------------------------
- * LINKS
- *
- * Define some minimal links styles
+/*---
+title: LINKS
+section: settings
+---
+Define some minimal links styles
+*/
 
-// Links variables
-
-$e-links__color: $f-color__digital-blue !default
-$e-links__hover-color: $f-color__digital-blue !default
+$e-links__color: map(colors,digital-blue) !default
+$e-links__hover-color: map(colors, digital-blue) !default
 
 $e-links__decoration: none !default
 $e-links__hover-decoration: underline !default
 
-// Links output
+/*---
+section: general
+*/
 
 a
   color: $e-links__color
