@@ -1,8 +1,8 @@
 module.exports = {
-  parser: 'src/sugarss',
+  parser: 'sugarss',
   plugins: [
     require('precss')({}),
-    require('postcss-easy-import')({ extensions: ['.sss'] }),
+    require('postcss-easy-import')({ extensions: ['.md'] }),
     require('postcss-mixins')({ mixinsDir: './src/sugarss/mixins' }),
     require('postcss-functions')({ glob: './src/functions' }),
     require('postcss-color-function')({ preserveCustomProps: true }),
