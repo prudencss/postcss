@@ -2,7 +2,8 @@
   "digital-blue": "cyan",
   "brand": {
     "primary": "yellow",
-    "secondary": "magenta"
+    "secondary": "magenta",
+    "accent": "black"
   },
   "state": {
     "info": "blue",
