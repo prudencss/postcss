@@ -5,6 +5,8 @@ section: settings
 Define some minimal links styles
 */
 
+$e-links__feature: map(feature-switches, elements, links)
+
 $e-links__color: map(colors,digital-blue) !default
 $e-links__hover-color: map(colors, digital-blue) !default
 
@@ -15,14 +17,15 @@ $e-links__hover-decoration: underline !default
 section: general
 */
 
-a
-  color: $e-links__color
-  text-decoration: $e-links__decoration
+if $e-links__feature
+  a
+    color: $e-links__color
+    text-decoration: $e-links__decoration
 
-  @if $e-links__hover-color != $e-links__color or $e-links__decoration != $e-links__hover-decoration
-    &:hover
-      @if $e-links__hover-color != $e-links__color
-        color: $e-links__hover-color
+    @if $e-links__hover-color != $e-links__color or $e-links__decoration != $e-links__hover-decoration
+      &:hover
+        @if $e-links__hover-color != $e-links__color
+          color: $e-links__hover-color
 
-      @if $e-links__decoration != $e-links__hover-decoration
-        text-decoration: $e-links__hover-decoration
+        @if $e-links__decoration != $e-links__hover-decoration
+          text-decoration: $e-links__hover-decoration

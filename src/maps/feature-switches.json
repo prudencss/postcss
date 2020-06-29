@@ -1,0 +1,11 @@
+{
+  "elements": {
+    "document": true,
+    "headings": true,
+    "paragraphs": true,
+    "hr": true,
+    "images": true,
+    "links": true,
+    "tables": true
+  }
+}
