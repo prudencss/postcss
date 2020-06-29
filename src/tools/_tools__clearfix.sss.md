@@ -1,8 +1,10 @@
-/* -------------------------------------------------------------------------
- * CLEARFIX
- *
- * Mixin to drop micro clearfix into a selector. Further reading:
- * http://www.cssmojo.com/the-very-latest-clearfix-reloaded/
+/*---
+title: CLEARFIX
+section: main
+---
+Mixin to drop micro clearfix into a selector. Further reading:
+http://www.cssmojo.com/the-very-latest-clearfix-reloaded/
+*/
 
 =t-clearfix
   &::after

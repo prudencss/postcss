@@ -9,6 +9,7 @@ module.exports = {
     require('postcss-contrast')({}),
     require('postcss-preset-env')({ preserve: true }),
     require('postcss-bem')({ defaultNamespace: undefined, style: 'suit' }),
+    require('postcss-quantity-queries')({}),
     require('postcss-map')({ basePath: './src/maps', maps: [] }),
     require('mdcss')({ theme: require('mdcss-theme-github') }),
     require('lost')
