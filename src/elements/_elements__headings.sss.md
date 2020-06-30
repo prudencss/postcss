@@ -5,7 +5,7 @@ section: settings
 Define some minimal heading styles
 */
 
-$e-headings__feature: map(feature-switches, elements, headings)
+$e-headings--enabled: map(feature-switches, elements, headings)
 
 $e-headings__font-weight: 400 !default
 
@@ -24,7 +24,7 @@ $e-headings__margin-bottom: $g-reset__spacing--vertical !default
 section: general
 */
 
-@if $e-headings__feature
+@if $e-headings__enabled
   h1,
   h2,
   h3,
@@ -39,7 +39,7 @@ section: general
 section: font-size
 */
 
-@if $e-headings__feature
+@if $e-headings__enabled
   h1
     font-size: $e-headings__font-size--h1
 

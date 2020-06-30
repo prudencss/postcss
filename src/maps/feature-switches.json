@@ -7,5 +7,20 @@
     "images": true,
     "links": true,
     "tables": true
+  },
+  "objects": {
+    "block": true,
+    "box": true,
+    "bullet": true,
+    "crop": true,
+    "flag": true,
+    "layout": true,
+    "list-bare": true,
+    "list-inline": true,
+    "media": true,
+    "pack": true,
+    "ratio": true,
+    "table": true,
+    "wrapper": true
   }
 }
