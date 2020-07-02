@@ -1,29 +1,20 @@
-/* -------------------------------------------------------------------------
- * CROP
- *
- * A cropping wrapper with preserved ratio
- *
- * Params:
- * ALIGNMENT .......................... Horizontal text alignment
+/*---
+title: CROP
+section: settings
+---
+A cropping wrapper with preserved ratio
+*/
 
-// Object variables
-// --------------------------------------------------
+$o-crop--enabled: map(feature-switches, objects, crop) !default
 
-// Object toggling
-
-$o-crop--enabled: true !default
-
-// Ratios
-
-$o-crop__ratios: $f-aspect-ratios !default
+$o-crop__ratios: ('1/1', '4/3', '3/2', '16/9', '2/1') !default
 $o-crop__ratios--enabled: true !default
-
-// Modifiers Alignments
 
 $o-crop__mod-alignments--enabled: true !default
 
-// Object as a mixin
-// --------------------------------------------------
+/*---
+section: mixins
+*/
 
 =o-crop
   position: relative
@@ -36,8 +27,22 @@ $o-crop__mod-alignments--enabled: true !default
   left: 0
   max-width: none
 
-// Object selector output
-// --------------------------------------------------
+=o-crop--unset
+  position: inherit
+  display: inherit
+  overflow: inherit
+
+=o-crop__content--unset
+  position: inherit
+  top: auto
+  left: auto
+  right: auto
+  max-width: inherit
+  transform: none
+
+/*---
+section: general
+*/
 
 @if $o-crop--enabled
   .o-crop
@@ -46,8 +51,9 @@ $o-crop__mod-alignments--enabled: true !default
   .o-crop__content
     +o-crop__content
 
-// Alignment modifiers
-// --------------------------------------------------
+/*---
+section: alignment modifiers
+*/
 
 @if $o-crop--enabled and $o-crop__mod-alignments--enabled
   .o-crop__content--left
@@ -67,26 +73,12 @@ $o-crop__mod-alignments--enabled: true !default
     left: 50%
     transform: translate(-50%, -50%)
 
-// Crop ratios
-// -------------------------------------------
+/*---
+section: crop ratios
+*/
 
 @if $o-crop--enabled and $o-crop__ratios--enabled
-  @each $_name, $_ratio in $o-crop__ratios
+  @each $_name in $o-crop__ratios
     .o-crop--#{$_name}
-      padding-bottom: $_ratio * 100%
+      padding-bottom: calc(map(aspect-ratios, #{$_name}) * 100%)
 
-// Unset as mixin
-// --------------------------------------------------
-
-=o-crop--unset
-  position: inherit
-  display: inherit
-  overflow: inherit
-
-=o-crop__content--unset
-  position: inherit
-  top: auto
-  left: auto
-  right: auto
-  max-width: inherit
-  transform: none
