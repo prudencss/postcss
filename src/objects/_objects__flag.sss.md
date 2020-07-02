@@ -1,37 +1,25 @@
-/* -------------------------------------------------------------------------
- * FLAG
- *
- * A media object based on tables
- *
- * The flag object is a design pattern similar to the media object, however it
- * utilises `display: table[-cell];` to give us control over the vertical
- * alignments of the text and image.
- *
- * Params:
- * ALIGNMENT .......................... Vertical image and body alignment
+/*---
+section: FLAG
+title: settings
+---
+A media object based on tables
+The flag object is a design pattern similar to the media object, however it
+utilises `display: table[-cell];` to give us control over the vertical
+alignments of the text and image.
+*/
 
-// Object variables
-// --------------------------------------------------
-
-// Object toggling
-
-$o-flag--enabled: true !default
-
-// Object Params
+$o-flag--enabled: map(feature-switches, objects, flag) !default
 
 $o-flag__alignment: middle !default
 
-// Modifiers Alignments
-
 $o-flag__mod-alignments--enabled: true !default
-$o-flag__mod-alignments: top, middle, bottom !default
-
-// Modifier Reverse
+$o-flag__mod-alignments: (top, middle, bottom) !default
 
 $o-flag__mod-reverse--enabled: true !default
 
-// Object as a mixin
-// --------------------------------------------------
+/*---
+section: mixins
+*/
 
 =o-flag
   display: table
@@ -50,34 +38,11 @@ $o-flag__mod-reverse--enabled: true !default
   vertical-align: $_vertical-alignment
   width: auto
 
-// Object selector output
-// --------------------------------------------------
-
-@if $o-flag--enabled
-  .o-flag
-    +o-flag
-
-  .o-flag__img
-    +o-flag__img
-
-  .o-flag__body
-    +o-flag__body
-
-// Alignment modifiers
-// --------------------------------------------------
-
 =o-flag__mod-alignment($_vertical-alignment: middle)
   .o-flag--#{$_vertical-alignment}
     > .o-flag__img,
     > .o-flag__body
       vertical-align: $_vertical-alignment
-
-@if $o-flag--enabled and $o-flag__mod-alignments--enabled
-  @each $_vertical-alignment in $o-flag__mod-alignments
-    +o-flag__mod-alignment($_vertical-alignment)
-
-// Reverse modifier
-// --------------------------------------------------
 
 =o-flag--reverse
   direction: rtl
@@ -98,12 +63,6 @@ $o-flag__mod-reverse--enabled: true !default
     > .o-flag__img
       +o-flag__img--reverse
 
-@if $o-flag--enabled and $o-flag__mod-reverse--enabled
-  +o-flag__mod-reverse
-
-// Unset as mixin
-// --------------------------------------------------
-
 =o-flag--unset
   display: inherit
   width: inherit
@@ -120,3 +79,32 @@ $o-flag__mod-reverse--enabled: true !default
   display: inherit
   vertical-align: inherit
   width: inherit
+
+/*---
+section: general
+*/
+
+@if $o-flag--enabled
+  .o-flag
+    +o-flag
+
+  .o-flag__img
+    +o-flag__img
+
+  .o-flag__body
+    +o-flag__body
+
+/*---
+section: alignment
+*/
+
+@if $o-flag--enabled and $o-flag__mod-alignments--enabled
+  @each $_vertical-alignment in $o-flag__mod-alignments
+    +o-flag__mod-alignment($_vertical-alignment)
+
+/*---
+section: reverse
+*/
+
+@if $o-flag--enabled and $o-flag__mod-reverse--enabled
+  +o-flag__mod-reverse
