@@ -1,25 +1,21 @@
-/* -------------------------------------------------------------------------
- * RATIO
- *
- * Ratio-bound content block
+/*---
+title: RATIO
+section: settings
+---
+Ratio-bound content block
+*/
 
-// Object variables
-// --------------------------------------------------
-
-// Object toggling
-
-$o-ratio--enabled: true !default
-
-// Modifiers Ratios
+$o-ratio--enabled: map(feature-switches, objects, ratio) !default
 
 $o-ratio__mod-ratios--enabled: true !default
-$o-ratio__mod-ratios: $f-aspect-ratios !default
+$o-ratio__mod-ratios: ("1/1", "4/3", "3/2", "16/9", "2/1") !default
 
 $o-ratio__mod-bp--enabled: true !default
-$o-ratio__mod-bp: map_remove($f-breakpoints, "xxs") !default
+$o-ratio__mod-bp: ("mobile", "tablet", "desktop", "widescreen", "fullhd") !default
 
-// Object as a mixin
-// -------------------------------------------
+/*---
+section: mixin
+*/
 
 =o-ratio($_ratio: 1)
   position: relative
@@ -39,44 +35,6 @@ $o-ratio__mod-bp: map_remove($f-breakpoints, "xxs") !default
   height: 100%
   width: 100%
 
-// Object selector output
-// -------------------------------------------
-
-@if $o-ratio--enabled
-  .o-ratio
-    +o-ratio
-
-  .o-ratio__content
-    +o-ratio__content
-
-// Ratio modifiers mixin
-// -------------------------------------------
-
-=o-ratio--override($ratio)
-  &::before
-    padding-top: $ratio * 100%
-
-// Ratio modifiers output
-// -------------------------------------------
-
-@if $o-ratio--enabled and $o-ratio__mod-ratios--enabled
-  @each $_name, $_ratio in $o-ratio__mod-ratios
-    .o-ratio--#{$_name}
-      +o-ratio--override($_ratio)
-
-// Ratio modifiers output in breakpoints
-// -------------------------------------------
-
-@if $o-ratio--enabled and $o-ratio__mod-ratios--enabled and $o-ratio__mod-bp--enabled
-  @each $_bp-name, $_bp-value in $o-ratio__mod-bp
-    @each $_name, $_ratio in $o-ratio__mod-ratios
-      +t-mq($from: $_bp-name)
-        .o-ratio--#{$_name}#{s-core-string-breakpoint($_bp-name)}
-          +o-ratio--override($_ratio)
-
-// Unset as mixin
-// --------------------------------------------------
-
 =o-ratio--unset
   position: inherit
 
@@ -94,3 +52,39 @@ $o-ratio__mod-bp: map_remove($f-breakpoints, "xxs") !default
   left: auto
   height: auto
   width: auto
+
+=o-ratio--override($ratio)
+  &::before
+    padding-top: calc(#{$ratio} * 100%)
+
+/*---
+section: general
+*/
+
+@if $o-ratio--enabled
+  .o-ratio
+    +o-ratio
+
+  .o-ratio__content
+    +o-ratio__content
+
+/*---
+section: ratios
+*/
+
+@if $o-ratio--enabled and $o-ratio__mod-ratios--enabled
+  @each $_name  in $o-ratio__mod-ratios
+    .o-ratio--#{$_name}
+      +o-ratio--override(map(aspect-ratios, #{$_name}))
+
+/*---
+section: ratios by breakpoints
+*/
+
+@if $o-ratio--enabled and $o-ratio__mod-ratios--enabled and $o-ratio__mod-bp--enabled
+  @each $_bp-name in $o-ratio__mod-bp
+    @each $_name in $o-ratio__mod-ratios
+      +t-mq($from: $_bp-name)
+        .o-ratio--#{$_name}#{stringBreakpoint($_bp-name)}
+          +o-ratio--override(map(aspect-ratios, #{$_name}))
+
