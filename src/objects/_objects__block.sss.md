@@ -1,34 +1,22 @@
-/* -------------------------------------------------------------------------
- * BLOCK
- *
- * Stacked content object with or without header and footer.
- * A simple abstraction to cover a very commonly occurring design pattern.
- *
- * Params:
- * ALIGNMENT .......................... Horizontal text alignment
+/*---
+title: BLOCK
+section: settings
+---
+Stacked content object with or without header and footer.
+*/
 
-// Object variables
-// --------------------------------------------------
-
-// Object toggling
-
-$o-block--enabled: true !default
-
-// Object Params
+$o-block--enabled: map(feature-switches, objects, block) !default
 
 $o-block__alignment: center !default
 
-// Modifiers Alignments
-
 $o-block__mod-alignments--enabled: true !default
-$o-block__mod-alignments: left, center, right !default
-
-// Modifiers Stretch
+$o-block__mod-alignments: (left, center, right) !default
 
 $o-block__mod-stretch--enabled: true !default
 
-// Object as a mixin
-// --------------------------------------------------
+/*---
+section: mixins
+*/
 
 =o-block($_alignment-direction: $o-block__alignment)
   display: block
@@ -42,22 +30,6 @@ $o-block__mod-stretch--enabled: true !default
 
 =o-block__footer
   display: block
-
-// Object selector output
-// --------------------------------------------------
-
-@if $o-block--enabled
-  .o-block
-    +o-block
-
-  .o-block__header
-    +o-block__header
-
-  .o-block__body
-    +o-block__body
-
-  .o-block__footer
-    +o-block__footer
 
 // Alignment modifiers
 // --------------------------------------------------
@@ -90,9 +62,6 @@ $o-block__mod-stretch--enabled: true !default
     > .o-block__body
       +o-block__body--stretch
 
-@if $o-block--enabled and $o-block__mod-stretch--enabled
-  +o-block__mod-stretch
-
 // Unset as mixin
 // --------------------------------------------------
 
@@ -108,3 +77,24 @@ $o-block__mod-stretch--enabled: true !default
 
 =o-block__footer--unset
   display: inherit
+
+/*---
+section: general
+*/
+
+@if $o-block--enabled
+  .o-block
+    +o-block
+
+  .o-block__header
+    +o-block__header
+
+  .o-block__body
+    +o-block__body
+
+  .o-block__footer
+    +o-block__footer
+
+@if $o-block--enabled and $o-block__mod-stretch--enabled
+  +o-block__mod-stretch
+
