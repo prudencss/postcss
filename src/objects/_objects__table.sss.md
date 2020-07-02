@@ -1,73 +1,44 @@
-/* -------------------------------------------------------------------------
- * TABLE
- *
- * A simple object for manipulating the structure of HTML `table`s.
- *
- * Params:
- * SPACE .............................. Horizontal separation between cells
+/*---
+title: TABLE
+section: settings
+---
+A simple object for manipulating the structure of HTML `table`s.
+*Params:*
+* SPACE .............................. Horizontal separation between cells
 
-// Object variables
-// --------------------------------------------------
+$o-table--enabled: map(feature-switches, objects, table) !default
 
-// Object toggling
-
-$o-table--enabled: true !default
-
-// Object Params
-
-$o-table__space: $f-space--none !default
-
-// Modifiers Spaces
+$o-table__space: map(spaces, none) !default
 
 $o-table_mod-spaces--enabled: true !default
-$o-table__mod-spaces: map_remove($f-spaces, "large", "huge") !default
-
-// Modifiers Fixed
+$o-table__mod-spaces: (none, xs, s, m, l, xl)
 
 $o-table__mod-fixed--enabled: true !default
 
-// Object as a mixin
-// --------------------------------------------------
+/*---
+section: mixin
+*/
 
 =o-table
   width: 100%
 
 =o-table__cell($_space-value: $o-table__space)
-  padding: s-core-px-to-rem($_space-value)
-
-// Object selector output
-// --------------------------------------------------
-
-@if $o-table--enabled
-  .o-table
-    +o-table
-
-    th,
-    td
-      +o-table__cell
+  padding: $_space-value
 
 // Space modifiers
 // --------------------------------------------------
 
-=o-table__mod-space($_space-name: "none", $_space-value: 0)
+=o-table__mod-space($_space-name: "none", $_space-value: map(spaces, none))
   .o-table--space-#{$_space-name}
     th,
     td
-      padding: s-core-px-to-rem($_space-value)
-
-@if $o-table--enabled and $o-table_mod-spaces--enabled
-  @each $_space-name, $_space-value in $o-table__mod-spaces
-    +o-table__mod-space($_space-name, $_space-value)
+      padding: $_space-value
 
 // Fixed modifier
 // --------------------------------------------------
 
 =o-table--fixed
   table-layout: fixed
-
-@if $o-table--enabled and $o-table__mod-fixed--enabled
-  .o-table--fixed
-    +o-table--fixed
 
 // Unset as mixin
 // --------------------------------------------------
@@ -77,3 +48,32 @@ $o-table__mod-fixed--enabled: true !default
 
 =o-table__cell--unset
   padding: inherit
+
+/*---
+section: general
+*/
+
+@if $o-table--enabled
+  .o-table
+    +o-table
+
+    th,
+    td
+      +o-table__cell
+
+/*---
+section: spaces
+*/
+
+@if $o-table--enabled and $o-table_mod-spaces--enabled
+  @each $_space-name in $o-table__mod-spaces
+    +o-table__mod-space($_space-name, map(spaces, #{$_space-name}))
+
+/*---
+section: fixed
+*/
+
+@if $o-table--enabled and $o-table__mod-fixed--enabled
+  .o-table--fixed
+    +o-table--fixed
+
