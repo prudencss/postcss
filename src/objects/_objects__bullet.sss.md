@@ -1,40 +1,29 @@
-/* -------------------------------------------------------------------------
- * BULLET
- *
- * The bullet pattern is used to align an icon with some text,
- * similar to how a bullet point has the icon and the text
+/*---
+title: BULLET
+section:settings
+---
+The bullet pattern is used to align an icon with some text,
+similar to how a bullet point has the icon and the text
 
-// Object variables
-// --------------------------------------------------
-
-// Object toggling
-
-$o-bullet--enabled: true !default
+$o-bullet--enabled: map(feature-switches, objects, bullet) !default
 
 $o-bullet__icon-size: 1em !default
 $o-bullet__icon--padding-left: 0.3em !default
 
-$o-bullet__text--line-height: $f-line-height--small !default
-
-// Modifier Block
+$o-bullet__text--line-height: map(line-heights, s) !default
 
 $o-bullet__mod-block--enabled: true !default
 
-// Modifier Middle
-
 $o-bullet__mod-middle--enabled: true !default
-
-// Modifier Reverse
 
 $o-bullet__mod-reverse--enabled: true !default
 
-// Icons Size Modifiers
-
 $o-bullet__mod-iconsize--enabled: true !default
-$o-bullet__mod-iconsizes: ("s": 0.5em, "m": 1em, "l": 1.5em, "xl": 2em, "xxl": 2.5em, "xxxl": 3em) !default
+$o-bullet__mod-iconsizes: (s, m, l, xl, xxl, xxxl) !default
 
-// Object as a mixin
-// --------------------------------------------------
+/*---
+section: mixin
+*/
 
 =o-bullet
   display: inline-block
@@ -52,19 +41,6 @@ $o-bullet__mod-iconsizes: ("s": 0.5em, "m": 1em, "l": 1.5em, "xl": 2em, "xxl": 2
   line-height: $o-bullet__text--line-height
   padding-left: $o-bullet__icon--padding-left
 
-// Object selector output
-// --------------------------------------------------
-
-@if $o-bullet--enabled
-  .o-bullet
-    +o-bullet
-
-  .o-bullet__icon
-    +o-bullet__icon
-
-  .o-bullet__text
-    +o-bullet__text
-
 // Block modifier
 // --------------------------------------------------
 
@@ -78,11 +54,12 @@ $o-bullet__mod-iconsizes: ("s": 0.5em, "m": 1em, "l": 1.5em, "xl": 2em, "xxl": 2
   width: $o-bullet__icon-size
   max-width: $o-bullet__icon-size
 
+
 =o-bullet__text--block
   display: table-cell
   vertical-align: top
   width: auto
-  padding-left: $o-bullet__icon--padding-left * 2
+  padding-left: calc(#{$o-bullet__icon--padding-left} * 2)
 
 =o-bullet__mod-block
   .o-bullet--block
@@ -95,9 +72,6 @@ $o-bullet__mod-iconsizes: ("s": 0.5em, "m": 1em, "l": 1.5em, "xl": 2em, "xxl": 2
 
     > .o-bullet__text
       +o-bullet__text--block
-
-@if $o-bullet--enabled and $o-bullet__mod-block--enabled
-  +o-bullet__mod-block
 
 // Middle modifier
 // --------------------------------------------------
@@ -125,18 +99,12 @@ $o-bullet__mod-iconsizes: ("s": 0.5em, "m": 1em, "l": 1.5em, "xl": 2em, "xxl": 2
     > .o-bullet__text
       +o-bullet__text--middle
 
-@if $o-bullet--enabled and $o-bullet__mod-middle--enabled
-  +o-bullet__mod-middle
-
 // Reverse modifiers
 // --------------------------------------------------
 
 =o-bullet__mod-reverse
   .o-bullet--reverse
     direction: rtl
-
-@if $o-bullet--enabled and $o-bullet__mod-reverse--enabled
-  +o-bullet__mod-reverse
 
 // Icon Size modifiers
 // --------------------------------------------------
@@ -148,10 +116,6 @@ $o-bullet__mod-iconsizes: ("s": 0.5em, "m": 1em, "l": 1.5em, "xl": 2em, "xxl": 2
       height: $_iconsize-value
       max-width: $_iconsize-value
 
-@if $o-bullet--enabled and $o-bullet__mod-iconsize--enabled
-  @each $_iconsize-name, $_iconsize-value in $o-bullet__mod-iconsizes
-    +o-bullet--iconsize($_iconsize-name, $_iconsize-value)
-
 // Unset as mixin
 // --------------------------------------------------
 
@@ -160,3 +124,32 @@ $o-bullet__mod-iconsizes: ("s": 0.5em, "m": 1em, "l": 1.5em, "xl": 2em, "xxl": 2
 
 =o-bullet__icon--unset
   display: inherit
+
+/*---
+section: general
+*/
+
+@if $o-bullet--enabled
+  .o-bullet
+    +o-bullet
+
+  .o-bullet__icon
+    +o-bullet__icon
+
+  .o-bullet__text
+    +o-bullet__text
+
+@if $o-bullet--enabled and $o-bullet__mod-block--enabled
+  +o-bullet__mod-block
+
+@if $o-bullet--enabled and $o-bullet__mod-middle--enabled
+  +o-bullet__mod-middle
+
+
+@if $o-bullet--enabled and $o-bullet__mod-reverse--enabled
+  +o-bullet__mod-reverse
+
+@if $o-bullet--enabled and $o-bullet__mod-iconsize--enabled
+  @each $_iconsize-name in $o-bullet__mod-iconsizes
+    +o-bullet--iconsize($_iconsize-name, map(bullets, icon-sizes, #{$_iconsize-name})
+
