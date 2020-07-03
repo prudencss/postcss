@@ -22,5 +22,9 @@
     "ratio": true,
     "table": true,
     "wrapper": true
+  },
+  "utilities": {
+    "colors": true
+
   }
 }
