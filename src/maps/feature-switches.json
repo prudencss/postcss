@@ -24,7 +24,7 @@
     "wrapper": true
   },
   "utilities": {
-    "colors": true
-
+    "colors": true,
+    "hidden": true
   }
 }
