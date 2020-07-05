@@ -1,15 +1,14 @@
-/* -------------------------------------------------------------------------
- * LIST BARE
- *
- * Strip list-like appearance from lists by removing their bullets, and any
- * indentation.
+/*---
+title: LIST BARE
+section: settings
+---
+Strip list-like appearance from lists by removing their bullets, and any indentation.
 
-// Object variables
-// --------------------------------------------------
+$o-list-bare--enabled: map(feature-switches, objects, list-bare) !default
 
-// Object toggling
-
-$o-list-bare--enabled: true !default
+/*---
+section: mixin
+*/
 
 // Object as a mixin
 // --------------------------------------------------
@@ -18,16 +17,18 @@ $o-list-bare--enabled: true !default
   list-style: none
   margin-left: 0
 
-// Object selector output
-// --------------------------------------------------
-
-@if $o-list-bare--enabled
-  .o-list-bare
-    +o-list-bare
-
 // Unset as mixin
 // --------------------------------------------------
 
 =o-list-bare--unset
   list-style: inherit
   margin-left: inherit
+
+/*---
+section: general
+*/
+
+@if $o-list-bare--enabled
+  .o-list-bare
+    +o-list-bare
+
