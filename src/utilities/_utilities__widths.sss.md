@@ -1,8 +1,8 @@
 /*---
-title: utility-widths
+title: utility-grid
 section: settings
 ---
-Generates a series of utility classes that give a fluid width to whichever element they're applied, combining the fractions numbers, e.g.:
+Generates a series of utility classes that give a fluid width to whichever element they're applied, combining the fractions numbers (there are $u-grid__fractions number of fractions), e.g.:
 
 ```example:html
   <img src="" alt="" class="u-1/2" />
@@ -29,69 +29,68 @@ Optionally, offset classes can br generated which can push and pull elements lef
 This is useful for making very granular changes to the rendered order of items in a layout.
 */
 
-$u-widths--enabled: map(feature-switches, utilities, widths) !default
+$u-grid--enabled: map(feature-switches, utilities, grid) !default
 
 // Fractions
 
-$u-widths__fractions: (1, 2, 3, 4, 5,  6, 7, 8, 9, 10, 11, 12) !default
+$u-grid__fractions: 16 !default
 
 // Breakpoints
 
-$u-widths__bp--enabled: true !default
-$u-widths__bp: (mobile, tablet, desktop, widescreen, fullhd) !default
-
-// Pull and push options
-
-$u-widths__offset-push--enabled: true !default
-$u-widths__offset-pull--enabled: true !default
+$u-grid__bp--enabled: true !default
+$u-grid__bp: (mobile, tablet, desktop, widescreen, fullhd) !default
 
 /*---
 section: mixin
 */
 
-=u-widths($_columns, $_bp-suffix: null)
-  @each $_denominator in $_columns
+=u-grid($_fractions, $_bp-suffix: null)
+  @each $_denominator from 1 through $_fractions
     @for $_numerator from 1 through $_denominator
       @if $_numerator != $_denominator or $_denominator == 1
-        .u-#{$_numerator}\/#{$_denominator}#{$_bp-suffix}
-          width: ($_numerator / $_denominator * 100%) !important
+        @each $_grid-type in (column, row, waffle)
+          @if $_bp-suffix == null
+            .u-grid__#{$_grid-type}--#{$_numerator}\/#{$_denominator}
+              lost-#{$_grid-type}: $_numerator / $_denominator
 
-        @if $u-widths__offset-push--enabled and $_denominator > 1
-          .u-push--#{$_numerator}\/#{$_denominator}#{$_bp-suffix}
-            left: ($_numerator / $_denominator * 100%) !important
+            @if $_denominator > 1
+              .u-grid__push--#{$_numerator}\/#{$_denominator}
+                lost-offset: $_numerator / $_denominator
+              .u-grid__move-fwd--#{$_numerator}\/#{$_denominator}
+                lost-move: $_numerator / $_denominator
 
-        @if $u-widths__offset-pull--enabled and $_denominator > 1
-          .u-pull--#{$_numerator}\/#{$_denominator}#{$_bp-suffix}
-            right: ($_numerator / $_denominator * 100%) !important
+            @if $_denominator > 1
+              .u-grid__pull--#{$_numerator}\/#{$_denominator}
+                lost-offset: - $_numerator / $_denominator
+              .u-grid__move-bwd--#{$_numerator}\/#{$_denominator}
+                lost-move: - $_numerator / $_denominator
+          @else
+            .u-grid__#{$-grid-type}--#{$_numerator}\/#{$_denominator}#{$_bp-suffix}
+              lost-#{$_grid-type}: $_numerator / $_denominator
 
-  @if $u-widths__offset-push--enabled
-    [class^="u-push"],
-    [class*=" u-push"]
-      position: relative
-      right: auto !important
+            @if $_denominator > 1
+              .u-grid__push--#{$_numerator}\/#{$_denominator}#{$_bp-suffix}
+                lost-offset: $_numerator / $_denominator
+              .u-grid__move-fwd--#{$_numerator}\/#{$_denominator}#{$_bp-suffix}
+                lost-move: $_numerator / $_denominator
 
-    .u-push--0#{$_bp-suffix}
-      left: auto !important
+            @if $_denominator > 1
+              .u-grid__pull--#{$_numerator}\/#{$_denominator}#{$_bp-suffix}
+                lost-offset: - $_numerator / $_denominator
+              .u-grid__move-bwd--#{$_numerator}\/#{$_denominator}#{$_bp-suffix}
+                lost-move: - $_numerator / $_denominator
 
-  @if $u-widths__offset-pull--enabled
-    [class^="u-pull"],
-    [class*=" u-pull"]
-      position: relative
-      left: auto !important
+/*---
+section: general
+*/
 
-    .u-pull--0#{$_bp-suffix}
-      right: auto !important
-
-// Build classes
-// --------------------------------------------------
-
-@if $u-widths--enabled
-  +u-widths($u-widths__fractions)
+@if $u-grid--enabled
+  +u-grid($u-grid__fractions)
 
 // Build classes with breakpoint suffixes
 // --------------------------------------------------
 
-@if $u-widths--enabled and $u-widths__bp--enabled
-  @each $_bp-name, $_bp-value in $u-widths__bp
+@if $u-grid--enabled and $u-grid__bp--enabled
+  @each $_bp-name in $u-grid__bp
     +t-mq($from: $_bp-name)
-      +u-widths($u-widths__fractions, s-core-string-breakpoint($_bp-name))
+      +u-grid($u-grid__fractions, stringBreakpoint($_bp-name))
