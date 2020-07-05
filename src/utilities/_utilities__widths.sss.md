@@ -1,53 +1,53 @@
-/* -------------------------------------------------------------------------
- * WIDTHS
- *
- * Generates a series of utility classes that give a fluid width to
- * whichever element they're applied, combining the fractions numbers, e.g.:
- *
- *   <img src="" alt="" class="u-1/2" />
- *
- * These classes are most commonly used in conjunction with objects, e.g.:
- *
- *   <div class="o-layout__item  u-1/2">
- *
- * By default, will also generate responsive variants of each of these
- * classes by using your Sass MQ configuration, e.g.:
- *
- *   <div class="o-layout__item  u-1/1  u-1/2@sm  u-1/3@lg">
- *
- * Optionally, offset classes can br generated which can push and pull
- * elements left and right by a specified amount, e.g.:
- *
- *   <div class="o-layout__item  u-2/3  u-pull--1/3">
- *
- * This is useful for making very granular changes to the rendered order of
- * items in a layout.
- *
- * N.B. This option is turned off by default.
+/*---
+title: utility-widths
+section: settings
+---
+Generates a series of utility classes that give a fluid width to whichever element they're applied, combining the fractions numbers, e.g.:
 
-// Utility variables
-// --------------------------------------------------
+```example:html
+  <img src="" alt="" class="u-1/2" />
+```
 
-// Utility toggling
+These classes are most commonly used in conjunction with objects, e.g.:
 
-$u-widths--enabled: true !default
+```obj combinatoric example:html
+  <div class="o-layout__item  u-1/2">
+```
+
+By default, will also generate responsive variants of each of these classes by using your Sass MQ configuration, e.g.:
+
+```obj combinatori example with breakpoints:html
+  <div class="o-layout__item  u-1/1  u-1/2@sm  u-1/3@lg">
+```
+
+Optionally, offset classes can br generated which can push and pull elements left and right by a specified amount, e.g.:
+
+```move helpers:html
+  <div class="o-layout__item  u-2/3  u-pull--1/3">
+```
+
+This is useful for making very granular changes to the rendered order of items in a layout.
+*/
+
+$u-widths--enabled: map(feature-switches, utilities, widths) !default
 
 // Fractions
 
-$u-widths__fractions: 1 2 3 4 5 !default
+$u-widths__fractions: (1, 2, 3, 4, 5,  6, 7, 8, 9, 10, 11, 12) !default
 
-// Option Breakpoints
+// Breakpoints
 
 $u-widths__bp--enabled: true !default
-$u-widths__bp: map_remove($f-breakpoints, "xxs") !default
+$u-widths__bp: (mobile, tablet, desktop, widescreen, fullhd) !default
 
 // Pull and push options
 
-$u-widths__offset-push--enabled: false !default
-$u-widths__offset-pull--enabled: false !default
+$u-widths__offset-push--enabled: true !default
+$u-widths__offset-pull--enabled: true !default
 
-// Utility mixin
-// --------------------------------------------------
+/*---
+section: mixin
+*/
 
 =u-widths($_columns, $_bp-suffix: null)
   @each $_denominator in $_columns
