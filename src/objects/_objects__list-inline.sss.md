@@ -1,14 +1,15 @@
-/* -------------------------------------------------------------------------
- * LIST IN-LINE
- *
- * The list-inline object simply displays a list of items in one line.
-
-// Object variables
-// --------------------------------------------------
-
-// Object toggling
+/*---
+title: LIST IN-LINE
+section: settings
+---
+The list-inline object displays a list of items in one line.
+*/
 
 $o-list-inline--enabled: true !default
+
+/*---
+section: mixin
+*/
 
 // Object as a mixin
 // --------------------------------------------------
@@ -17,15 +18,8 @@ $o-list-inline--enabled: true !default
   font-size: 0
 
   > *
-    font-size: s-core-px-to-rem($s-core__font-size)
+    font-size: pxToRem(map(settings, coreFontSize))
     display: inline-block
-
-// Object selector output
-// --------------------------------------------------
-
-@if $o-list-inline--enabled
-  .o-list-inline
-    +o-list-inline
 
 // Unset as mixin
 // --------------------------------------------------
@@ -36,3 +30,15 @@ $o-list-inline--enabled: true !default
   > *
     font-size: inherit
     display: inherit
+
+/*---
+section: general
+*/
+
+// Object selector output
+// --------------------------------------------------
+
+@if $o-list-inline--enabled
+  .o-list-inline
+    +o-list-inline
+
