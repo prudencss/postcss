@@ -41,6 +41,12 @@
     "postcss-preset-env": "^6.7.0",
     "postcss-quantity-queries": "^0.5.0",
     "precss": "^4.0.0",
+    "prettier": "^2.0.5",
+    "stylelint": "^13.6.1",
+    "stylelint-config-rational-order": "^0.1.2",
     "sugarss": "^2.0.0"
+  },
+  "devDependencies": {
+    "prettier-stylelint": "^0.4.2"
   }
 }
