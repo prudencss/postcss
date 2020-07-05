@@ -11,7 +11,7 @@ $o-wrapper__mod-bp-from--enabled: true !default
 $o-wrapper__mod-bp-to--enabled: true !default
 $o-wrapper__mod-bp: (mobile, tablet, desktop, widescreen, fullhd) @default
 
-/*
+/*---
 section: mixin
 */
 
@@ -35,7 +35,7 @@ section: mixin
         +t-mq($from: $_s-bp-name)
           max-width: pxToRem(map(breakpoints, $_bp-name))
 
-/*
+/*---
 section: general
 */
 
