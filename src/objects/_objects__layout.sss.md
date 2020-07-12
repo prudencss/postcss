@@ -1,76 +1,62 @@
-/* -------------------------------------------------------------------------
- * LAYOUT
- *
- * Grid-like layout system.
- *
- * The layout object provides us with a column-style layout system. This file
- * contains the basic structural elements, but classes should be complemented
- * with width utilities, for example:
- *
- *   <div class="o-layout">
- *     <div class="o-layout__item  u-1/2">
- *     </div>
- *     <div class="o-layout__item  u-1/2">
- *     </div>
- *   </div>
- *
- * The above will create a two-column structure in which each column will
- * fluidly fill half of the width of the parent. We can have more complex
- * systems:
- *
- *   <div class="o-layout">
- *     <div class="o-layout__item  u-1/1  u-1/3@md">
- *     </div>
- *     <div class="o-layout__item  u-1/2  u-1/3@md">
- *     </div>
- *     <div class="o-layout__item  u-1/2  u-1/3@md">
- *     </div>
- *   </div>
- *
- * The above will create a system in which the first item will be 100% width
- * until we enter our medium breakpoint, when it will become 33.333% width. The
- * second and third items will be 50% of their parent, until they also become
- * 33.333% width at the medium breakpoint.
- *
- * We can also manipulate entire layout systems by adding a series of modifiers
- * to the `.o-layout` block. For example:
- *
- *   <div class="o-layout  o-layout--reverse">
- *
- * This will reverse the displayed order of the system so that it runs in the
- * opposite order to our source, effectively flipping the system over.
- *
- *   <div class="o-layout  o-layout--[right|center]">
- *
- * This will cause the system to fill up from either the centre or the right
- * hand side. Default behaviour is to fill up the layout system from the left.
- *
- * There are plenty more options available to us: explore them below.
- *
- *
- * By default we use the `font-size: 0;` trick to remove whitespace between
- * items. Set this to true in order to use a markup-based strategy like
- * commenting out whitespace or minifying HTML.
- *
- *
- * Params:
- * SPACE .............................. Horizontal separation between layout__items
+/*---
+title: LAYOUT
+section: settings
+---
+Grid-like layout system. Based on and utilizing PostCSS Lost-Grid.
 
-// Object variables
-// --------------------------------------------------
+The layout object provides us with a column-style layout system. This file contains the basic structural elements, but classes should be complemented with width utilities, for example:
 
-// Object toggling
+```Basic example:html
+<div class="o-layout">
+  <div class="o-layout__item  u-1/2">
+  </div>
+  <div class="o-layout__item  u-1/2">
+  </div>
+</div>
+```
 
-$o-layout--enabled: true !default
+The above will create a two-column structure in which each column will fluidly fill half of the width of the parent. We can have more complex systems:
 
-// Object Params
+```More C0mplex example:html
+<div class="o-layout">
+  <div class="o-layout__item  u-1/1  u-1/3@md">
+  </div>
+  <div class="o-layout__item  u-1/2  u-1/3@md">
+  </div>
+  <div class="o-layout__item  u-1/2  u-1/3@md">
+  </div>
+</div>
+```
+
+The above will create a system in which the first item will be 100% width until we enter our medium breakpoint, when it will become 33.333% width. The second and third items will be 50% of their parent, until they also become 33.333% width at the medium breakpoint.
+We can also manipulate entire layout systems by adding a series of modifiers to the `.o-layout` block. For example:
+
+```Modifiers example:html
+<div class="o-layout  o-layout--reverse">
+```
+
+This will reverse the displayed order of the system so that it runs in the opposite order to our source, effectively flipping the system over.
+
+```html
+<div class="o-layout  o-layout--[right|center]">
+```
+
+This will cause the system to fill up from either the centre or the right hand side. Default behaviour is to fill up the layout system from the left. There are plenty more options available to us: explore them below.
+
+By default we use the `font-size: 0;` trick to remove whitespace between items. Set this to true in order to use a markup-based strategy like commenting out whitespace or minifying HTML.
+
+Params:
+* SPACE .............................. Horizontal separation between layout__items
+*/
+
+$o-layout--enabled: map(feature-switches, objects, layout) !default
 
 $o-layout__space: $g-reset__spacing--horizontal !default
 
 // Modifiers spaces
 
 $o-layout__mod-spaces--enabled: true !default
-$o-layout__mod-spaces: map_remove($f-spaces, "large", "huge") !default
+$o-layout__mod-spaces: (none, xs, s, m, l, xl) !default
 
 // Modifiers Alignments
 
@@ -84,8 +70,9 @@ $o-layout__mod-alignments-h: left, center, right !default
 
 $o-layout__mod-reverse--enabled: true !default
 
-// Object as a mixin
-// --------------------------------------------------
+/*---
+section: mixin
+*/
 
 =o-layout($_space-value: $o-layout__space)
   display: block
