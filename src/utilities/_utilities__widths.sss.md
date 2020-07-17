@@ -5,25 +5,25 @@ section: settings
 Generates a series of utility classes that give a fluid width to whichever element they're applied, combining the fractions numbers (there are $u-grid__fractions number of fractions), e.g.:
 
 ```example:html
-  <img src="" alt="" class="u-1/2" />
+  <img src="" alt="" class="u-grid__column--1/2" />
 ```
 
 These classes are most commonly used in conjunction with objects, e.g.:
 
 ```obj combinatoric example:html
-  <div class="o-layout__item  u-1/2">
+  <div class="o-layout__item  u-grid__row--1/2">
 ```
 
 By default, will also generate responsive variants of each of these classes by using your Sass MQ configuration, e.g.:
 
 ```obj combinatori example with breakpoints:html
-  <div class="o-layout__item  u-1/1  u-1/2@sm  u-1/3@lg">
+  <div class="o-layout__item  u-grid__column--1/1  u-grid__column--1/2@sm  u-grid__column--1/3@lg">
 ```
 
 Optionally, offset classes can br generated which can push and pull elements left and right by a specified amount, e.g.:
 
 ```move helpers:html
-  <div class="o-layout__item  u-2/3  u-pull--1/3">
+  <div class="o-layout__item  u-grid__waffle--2/3  u-grid__pull--1/3">
 ```
 
 This is useful for making very granular changes to the rendered order of items in a layout.

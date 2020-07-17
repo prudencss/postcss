@@ -8,7 +8,8 @@
   "state": {
     "info": "blue",
     "success": "green",
-    "warning": "red",
+    "warning": "orange",
+    "error": "red",
     "disabled": "gray"
   },
   "neutral": {
