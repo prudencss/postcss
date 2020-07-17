@@ -23,7 +23,7 @@ By default, will also generate responsive variants of each of these classes by u
 Optionally, offset classes can br generated which can push and pull elements left and right by a specified amount, e.g.:
 
 ```move helpers:html
-  <div class="o-layout__item  u-grid__waffle--2/3  u-grid__pull--1/3">
+  <div class="o-layout__item  u-grid__waffle--2/3  u-grid--pull--1/3">
 ```
 
 This is useful for making very granular changes to the rendered order of items in a layout.
@@ -44,7 +44,7 @@ $u-grid__bp: (mobile, tablet, desktop, widescreen, fullhd) !default
 section: mixin
 */
 
-=u-grid($_fractions, $_bp-suffix: null)
+=u-grid($_fractions: $u-grid__fractions, $_bp-suffix: null)
   @each $_denominator from 1 through $_fractions
     @for $_numerator from 1 through $_denominator
       @if $_numerator != $_denominator or $_denominator == 1
@@ -54,30 +54,30 @@ section: mixin
               lost-#{$_grid-type}: $_numerator / $_denominator
 
             @if $_denominator > 1
-              .u-grid__push--#{$_numerator}\/#{$_denominator}
+              .u-grid--push--#{$_numerator}\/#{$_denominator}
                 lost-offset: $_numerator / $_denominator
-              .u-grid__move-fwd--#{$_numerator}\/#{$_denominator}
+              .u-grid--move-fwd--#{$_numerator}\/#{$_denominator}
                 lost-move: $_numerator / $_denominator
 
             @if $_denominator > 1
-              .u-grid__pull--#{$_numerator}\/#{$_denominator}
+              .u-grid--pull--#{$_numerator}\/#{$_denominator}
                 lost-offset: - $_numerator / $_denominator
-              .u-grid__move-bwd--#{$_numerator}\/#{$_denominator}
+              .u-grid--move-bwd--#{$_numerator}\/#{$_denominator}
                 lost-move: - $_numerator / $_denominator
           @else
             .u-grid__#{$-grid-type}--#{$_numerator}\/#{$_denominator}#{$_bp-suffix}
               lost-#{$_grid-type}: $_numerator / $_denominator
 
             @if $_denominator > 1
-              .u-grid__push--#{$_numerator}\/#{$_denominator}#{$_bp-suffix}
+              .u-grid--push--#{$_numerator}\/#{$_denominator}#{$_bp-suffix}
                 lost-offset: $_numerator / $_denominator
-              .u-grid__move-fwd--#{$_numerator}\/#{$_denominator}#{$_bp-suffix}
+              .u-grid--move-fwd--#{$_numerator}\/#{$_denominator}#{$_bp-suffix}
                 lost-move: $_numerator / $_denominator
 
             @if $_denominator > 1
-              .u-grid__pull--#{$_numerator}\/#{$_denominator}#{$_bp-suffix}
+              .u-grid--pull--#{$_numerator}\/#{$_denominator}#{$_bp-suffix}
                 lost-offset: - $_numerator / $_denominator
-              .u-grid__move-bwd--#{$_numerator}\/#{$_denominator}#{$_bp-suffix}
+              .u-grid--move-bwd--#{$_numerator}\/#{$_denominator}#{$_bp-suffix}
                 lost-move: - $_numerator / $_denominator
 
 /*---
