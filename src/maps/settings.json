@@ -1,9 +1,10 @@
 {
   "env": "prod",
   "debug": true,
-  "coreFontSize": "16px",
-  "specialChar": {
-    "breakpointSeparator": "@",
-    "ratioSeparator": ":"
+  "core-font-size": "16px",
+  "grid-fractions": 16,
+  "special-char": {
+    "breakpoint-separator": "@",
+    "ratio-separator": ":"
   }
 }
