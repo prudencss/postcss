@@ -18,7 +18,7 @@ section: mixin
   font-size: 0
 
   > *
-    font-size: pxToRem(map(settings, coreFontSize))
+    font-size: pxToRem(map(settings, core-font-size))
     display: inline-block
 
 // Unset as mixin
