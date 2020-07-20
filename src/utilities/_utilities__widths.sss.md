@@ -45,40 +45,40 @@ section: mixin
 */
 
 =u-grid($_fractions: $u-grid__fractions, $_bp-suffix: null)
-  @each $_denominator from 1 through $_fractions
-    @for $_numerator from 1 through $_denominator
+  @for $_denominator from 1 to $_fractions
+    @for $_numerator from 1 to $_denominator
       @if $_numerator != $_denominator or $_denominator == 1
         @each $_grid-type in (column, row, waffle)
           @if $_bp-suffix == null
             .u-grid__#{$_grid-type}--#{$_numerator}\/#{$_denominator}
-              lost-#{$_grid-type}: $_numerator / $_denominator
+              lost-#{$_grid-type}: $_numerator/$_denominator
 
             @if $_denominator > 1
               .u-grid--push--#{$_numerator}\/#{$_denominator}
                 lost-offset: $_numerator / $_denominator
               .u-grid--move-fwd--#{$_numerator}\/#{$_denominator}
-                lost-move: $_numerator / $_denominator
+                lost-move: $_numerator/$_denominator
 
             @if $_denominator > 1
               .u-grid--pull--#{$_numerator}\/#{$_denominator}
-                lost-offset: - $_numerator / $_denominator
+                lost-offset: - $_numerator/$_denominator
               .u-grid--move-bwd--#{$_numerator}\/#{$_denominator}
-                lost-move: - $_numerator / $_denominator
+                lost-move: - $_numerator/$_denominator
           @else
             .u-grid__#{$-grid-type}--#{$_numerator}\/#{$_denominator}#{$_bp-suffix}
-              lost-#{$_grid-type}: $_numerator / $_denominator
+              lost-#{$_grid-type}: $_numerator/$_denominator
 
             @if $_denominator > 1
               .u-grid--push--#{$_numerator}\/#{$_denominator}#{$_bp-suffix}
-                lost-offset: $_numerator / $_denominator
+                lost-offset: $_numerator/$_denominator
               .u-grid--move-fwd--#{$_numerator}\/#{$_denominator}#{$_bp-suffix}
-                lost-move: $_numerator / $_denominator
+                lost-move: $_numerator/$_denominator
 
             @if $_denominator > 1
               .u-grid--pull--#{$_numerator}\/#{$_denominator}#{$_bp-suffix}
-                lost-offset: - $_numerator / $_denominator
+                lost-offset: - $_numerator/$_denominator
               .u-grid--move-bwd--#{$_numerator}\/#{$_denominator}#{$_bp-suffix}
-                lost-move: - $_numerator / $_denominator
+                lost-move: - $_numerator/$_denominator
 
 /*---
 section: general
