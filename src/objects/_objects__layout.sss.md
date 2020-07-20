@@ -8,9 +8,9 @@ The layout object provides us with a column-style layout system. This file conta
 
 ```Basic example:html
 <div class="o-layout">
-  <div class="o-layout__item  u-1/2">
+  <div class="o-layout__item  u-grid__row--1/2">
   </div>
-  <div class="o-layout__item  u-1/2">
+  <div class="o-layout__item  u-grid__row--1/2">
   </div>
 </div>
 ```
@@ -19,11 +19,11 @@ The above will create a two-column structure in which each column will fluidly f
 
 ```More C0mplex example:html
 <div class="o-layout">
-  <div class="o-layout__item  u-1/1  u-1/3@md">
+  <div class="o-layout__item  u-grid__column--1/1  u-grid__column--1/3@md">
   </div>
-  <div class="o-layout__item  u-1/2  u-1/3@md">
+  <div class="o-layout__item  u-grid__column--1/2  u-grid__column--1/3@md">
   </div>
-  <div class="o-layout__item  u-1/2  u-1/3@md">
+  <div class="o-layout__item  u-grid__column--1/2  u-grid__column--1/3@md">
   </div>
 </div>
 ```
@@ -51,36 +51,61 @@ Params:
 
 $o-layout--enabled: map(feature-switches, objects, layout) !default
 
-$o-layout__space: $g-reset__spacing--horizontal !default
+// Modifiers Flexbox
 
-// Modifiers spaces
-
-$o-layout__mod-spaces--enabled: true !default
-$o-layout__mod-spaces: (none, xs, s, m, l, xl) !default
+$o-layout__flex: (row, column)
 
 // Modifiers Alignments
 
-$o-layout__mod-alignments-v--enabled: true !default
-$o-layout__mod-alignments-v: top, middle, bottom !default
+$o-layout__mod-alignment-enabled: true !default
+$o-layout__mod-alignments: (reset, horzontal, vertical, top-left, top-center, top, top-right, middle-left, left, middle-center, center, middle-right, right, bottom-left, bottom-center, bottom, bottom-right)
 
-$o-layout__mod-alignments-h--enabled: true !default
-$o-layout__mod-alignments-h: left, center, right !default
+// Modifiers Centering Container
 
-// Modifiers Reverse
+$o-layout__mod-center--enabled: true !default
+$o-layout__mod-center--space: $g-reset__spacing--horizontal !default
+$o-layout__mod-center--spaces: (none, xs, s, m, l, xl) !default
 
-$o-layout__mod-reverse--enabled: true !default
+// Item Modiefier Units
+
+$o-layout__mod-unit-enabled: true !default
+$o-layout__mod-units: (percent, viewport)
 
 /*---
 section: mixin
 */
 
 =o-layout($_space-value: $o-layout__space)
-  display: block
   margin: 0
-  margin-left: -1 * s-core-px-to-rem($_space-value)
   padding: 0
   list-style: none
   font-size: 0
+
+  @each $_flexmod in $o-layout__flex
+    &.o-layout__#{$_flexmod}
+      lost-flex-container: $_flexmod
+
+      @if $o-layout__mod-unit-enabled
+        &.o-layout__units--percent
+          lost-unit: %
+        &.o-layout__units--viewport
+          @if $_flexmod == row
+            lost-unit: vw
+          @else
+            lost-unit: vh
+
+  @if $o-layout__mod-alignment--enabled
+    @each $_alignment in $o-layout__mod-alignments
+      &.o-layout__align--#{$_alignment}
+        lost-align: $_alignment flex
+
+  @if $o-layout__mod-center--enabled
+    @for $_denominator from 1 to map(settings, grid-fractions)
+      @for $_numerator from 1 to $_denominator
+        @if $_numerator != $_denominator or $_denominator == 1
+          @each $_spacing in $o-layout__mod-center--spaces
+            &.o-layout__center--#{$_numerator}\/#{$_denominator}-#{$_spacing}
+              lost-center: $_numerator/$_denominator $_spacing flex
 
 =o-layout__item($_space-value: $o-layout__space)
   box-sizing: border-box
